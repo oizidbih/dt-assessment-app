@@ -1,9 +1,8 @@
 import React from 'react';
 import { useAuth, type UserRole } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { ShieldCheck, User, BarChart3, Gavel, LayoutDashboard, Play, Info, X } from 'lucide-react';
+import { ShieldCheck, User, BarChart3, Gavel, LayoutDashboard, ChevronDown } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
 import backgroundImg from '../assets/background.jpg';
 import logoWithText from '../assets/logo.svg';
 import introVideo from '../assets/intro.mp4';
@@ -11,8 +10,6 @@ import introVideo from '../assets/intro.mp4';
 const Login: React.FC = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
-    const [showVideo, setShowVideo] = useState(false);
-    const [showMethodology, setShowMethodology] = useState(false);
 
     const handleLogin = (role: UserRole) => {
         login(role);
@@ -28,119 +25,119 @@ const Login: React.FC = () => {
     ];
 
     return (
-        <div className="min-h-screen relative flex items-center justify-center overflow-hidden">
+        <div className="min-h-screen relative flex flex-col items-center justify-center overflow-hidden font-inter">
 
             <div className="absolute inset-0 z-0">
                 <img src={backgroundImg} alt="Background" className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-dune bg-opacity-60 backdrop-blur-sm"></div>
+                <div className="absolute inset-0 bg-[#040F25] bg-opacity-60 backdrop-blur-sm"></div>
             </div>
+
+            {/* Premium Header */}
+            <header className="absolute top-0 left-0 right-0 z-50 bg-[#040F25] shadow-[0_20px_50px_rgba(59,130,246,0.15)] border-b border-white/5">
+                {/* Lighting Effect from top */}
+                <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent pointer-events-none h-px"></div>
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[2px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+
+                <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+                    <div className="flex items-center space-x-4">
+                        <img src={logoWithText} alt="MCIT Logo" className="h-12 w-auto filter brightness-0 invert" />
+                    </div>
+
+                    <nav className="hidden lg:flex items-center space-x-8">
+                        <a href="#" className="text-white text-xs font-bold tracking-widest hover:text-white/70 transition">HOME</a>
+                        <div className="flex items-center space-x-1 group cursor-pointer">
+                            <a href="#" className="text-white text-xs font-bold tracking-widest group-hover:text-white/70 transition uppercase">About Us</a>
+                            <ChevronDown className="w-3 h-3 text-white/70 group-hover:text-white transition" />
+                        </div>
+                        <a href="#" className="text-white text-xs font-bold tracking-widest hover:text-white/70 transition uppercase">Gov AI Program</a>
+                        <div className="flex items-center space-x-1 group cursor-pointer">
+                            <a href="#" className="text-white text-xs font-bold tracking-widest group-hover:text-white/70 transition uppercase">Career</a>
+                            <ChevronDown className="w-3 h-3 text-white/70 group-hover:text-white transition" />
+                        </div>
+                        <a href="#" className="text-white text-xs font-bold tracking-widest hover:text-white/70 transition uppercase">Services</a>
+                        <div className="flex items-center space-x-1 group cursor-pointer">
+                            <a href="#" className="text-white text-xs font-bold tracking-widest group-hover:text-white/70 transition uppercase">Media Centre</a>
+                            <ChevronDown className="w-3 h-3 text-white/70 group-hover:text-white transition" />
+                        </div>
+                        <div className="flex items-center space-x-1 group cursor-pointer">
+                            <a href="#" className="text-white text-xs font-bold tracking-widest group-hover:text-white/70 transition uppercase">Publications</a>
+                            <ChevronDown className="w-3 h-3 text-white/70 group-hover:text-white transition" />
+                        </div>
+                        <div className="flex items-center space-x-1 group cursor-pointer">
+                            <a href="#" className="text-white text-xs font-bold tracking-widest group-hover:text-white/70 transition uppercase">Help & Contact</a>
+                            <ChevronDown className="w-3 h-3 text-white/70 group-hover:text-white transition" />
+                        </div>
+                    </nav>
+                </div>
+            </header>
 
             <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
-                className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row gap-8 items-center"
+                className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-20"
             >
-                {/* Left Side: Welcome & actions */}
-                <div className="flex-1 text-center md:text-left text-white">
-                    <img src={logoWithText} alt="MCIT Logo" className="h-24 mx-auto md:mx-0 mb-6 drop-shadow-lg" />
-                    <h1 className="text-4xl font-bold mb-4">Digital Transformation Assessment</h1>
-                    <p className="text-lg text-gray-200 mb-8 max-w-lg">
-                        Accelerating the digital adoption across government entities in the State of Qatar.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                        <button
-                            onClick={() => setShowVideo(true)}
-                            className="flex items-center justify-center px-6 py-3 bg-al-adaam hover:bg-red-700 text-white rounded-lg font-semibold transition shadow-lg"
-                        >
-                            <Play className="w-5 h-5 mr-2" /> Watch Intro
-                        </button>
-                        <button
-                            onClick={() => setShowMethodology(true)}
-                            className="flex items-center justify-center px-6 py-3 bg-white bg-opacity-20 hover:bg-opacity-30 border border-white/40 text-white rounded-lg font-semibold transition backdrop-blur-md"
-                        >
-                            <Info className="w-5 h-5 mr-2" /> About Methodology
-                        </button>
-                    </div>
-                </div>
 
-                {/* Right Side: Login Card */}
-                <div className="w-full md:w-[450px] bg-white bg-opacity-95 backdrop-blur-sm rounded-2xl shadow-2xl p-8 border border-white/20">
-                    <h2 className="text-2xl font-bold text-dune mb-6 text-center">Select Interface</h2>
-                    <div className="grid grid-cols-1 gap-3 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
-                        {roles.map((item) => (
-                            <button
-                                key={item.role}
-                                onClick={() => handleLogin(item.role)}
-                                className="w-full flex items-center p-3 border border-gray-200 rounded-lg hover:border-al-adaam hover:bg-red-50 transition-all group text-left"
+                <div className="w-full flex flex-col md:flex-row gap-8 items-stretch justify-center">
+                    {/* Left Side: Welcome & Video */}
+                    <div className="w-full md:w-[450px] flex flex-col items-center md:items-start">
+                        {/* Video Player with Text Overlay */}
+                        <div className="w-full h-full rounded-xl overflow-hidden shadow-2xl border border-white/20 relative group flex items-center justify-center text-center min-h-[450px]">
+                            <video
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
+                                className="absolute inset-0 w-full h-full object-cover"
                             >
-                                <div className="mr-3 text-dune group-hover:text-al-adaam p-2 bg-gray-50 rounded-full group-hover:bg-white transition-colors">
-                                    {item.icon}
-                                </div>
-                                <div>
-                                    <h3 className="text-sm font-bold text-gray-800 group-hover:text-al-adaam">
-                                        {item.label}
-                                    </h3>
-                                    <p className="text-xs text-gray-500 leading-tight">
-                                        {item.description}
-                                    </p>
-                                </div>
-                            </button>
-                        ))}
+                                <source src={introVideo} type="video/mp4" />
+                            </video>
+                            {/* Dark overlay for readability */}
+                            <div className="absolute inset-0 bg-black/50"></div>
+
+                            {/* Text Overlay */}
+                            <div className="relative z-10 p-8 pt-12 flex flex-col items-center justify-start h-full">
+                                <h1 className="text-2xl md:text-3xl font-bold mb-4 text-white drop-shadow-lg drop-shadow-white/20">
+                                    Digital Transformation Assessment
+                                </h1>
+                                <p className="text-sm md:text-base text-gray-100 max-w-sm drop-shadow-md font-medium leading-relaxed">
+                                    Accelerating the digital adoption across government entities in the State of Qatar.
+                                </p>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    {/* Right Side: Login Card */}
+                    <div className="w-full md:w-[450px] bg-white bg-opacity-95 backdrop-blur-sm rounded-2xl shadow-2xl p-8 border border-white/20 flex flex-col">
+                        <h2 className="text-2xl font-bold text-dune mb-6 text-center">Select Interface</h2>
+                        <div className="grid grid-cols-1 gap-3 flex-1 overflow-y-auto pr-2 custom-scrollbar">
+                            {roles.map((item) => (
+                                <button
+                                    key={item.role}
+                                    onClick={() => handleLogin(item.role)}
+                                    className="w-full flex items-center p-3 border border-gray-200 rounded-lg hover:border-al-adaam hover:bg-red-50 transition-all group text-left"
+                                >
+                                    <div className="mr-3 text-dune group-hover:text-al-adaam p-2 bg-gray-50 rounded-full group-hover:bg-white transition-colors">
+                                        {item.icon}
+                                    </div>
+                                    <div>
+                                        <h3 className="text-sm font-bold text-gray-800 group-hover:text-al-adaam">
+                                            {item.label}
+                                        </h3>
+                                        <p className="text-xs text-gray-500 leading-tight">
+                                            {item.description}
+                                        </p>
+                                    </div>
+                                </button>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </motion.div>
 
-            {/* Video Modal */}
-            {showVideo && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-90 backdrop-blur">
-                    <div className="relative w-full max-w-4xl bg-black rounded-xl overflow-hidden shadow-2xl border border-gray-800">
-                        <button
-                            onClick={() => setShowVideo(false)}
-                            className="absolute top-4 right-4 z-10 p-2 bg-black/50 hover:bg-red-600 text-white rounded-full transition"
-                        >
-                            <X className="w-6 h-6" />
-                        </button>
-                        <video controls autoPlay className="w-full h-auto">
-                            <source src={introVideo} type="video/mp4" />
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                </div>
-            )}
 
-            {/* Methodology Modal */}
-            {showMethodology && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-60 backdrop-blur">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="relative w-full max-w-lg bg-white rounded-2xl p-8 shadow-2xl"
-                    >
-                        <button
-                            onClick={() => setShowMethodology(false)}
-                            className="absolute top-4 right-4 p-2 text-gray-400 hover:text-gray-900 rounded-full hover:bg-gray-100 transition"
-                        >
-                            <X className="w-5 h-5" />
-                        </button>
-                        <h3 className="text-2xl font-bold text-skyline mb-4">Assessment Methodology</h3>
-                        <div className="prose prose-sm text-gray-600">
-                            <p className="mb-3">
-                                The National Digital Transformation Assessment is based on a comprehensive framework evaluating entities across 4 key pillars:
-                            </p>
-                            <ul className="list-disc pl-5 space-y-2 mb-4">
-                                <li><strong>Strategy & Leadership:</strong> Vision, governance, and culture.</li>
-                                <li><strong>Technology & Innovation:</strong> Cloud adoption, AI, and cybersecurity.</li>
-                                <li><strong>Service Delivery:</strong> User experience and service automation.</li>
-                                <li><strong>Data Management:</strong> Data governance, quality, and analytics.</li>
-                            </ul>
-                            <p>
-                                Entities are scored on a scale of 0-5 for each question, with weighted averages determining the final Maturity Level (Nascent to Advanced).
-                            </p>
-                        </div>
-                    </motion.div>
-                </div>
-            )}
         </div>
     );
 };

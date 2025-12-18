@@ -13,6 +13,7 @@ export default {
         'palm': '#129b82',     // Teal Green
         'sea': '#4194b3',      // Steel Blue
         'sunrise': '#fdf39d',  // Soft Yellow
+        'deep-navy': '#040F25', // Sidebar Color
       }
     },
   },

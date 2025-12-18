@@ -12,6 +12,7 @@ import {
     Users
 } from 'lucide-react';
 import clsx from 'clsx';
+import logo from '../assets/logo.svg';
 
 const Sidebar: React.FC = () => {
     const { user } = useAuth();
@@ -58,9 +59,9 @@ const Sidebar: React.FC = () => {
     const links = getLinks(user.role);
 
     return (
-        <div className="w-64 bg-skyline min-h-screen flex flex-col text-white">
-            <div className="h-16 flex items-center justify-center border-b border-white/10">
-                <h1 className="text-xl font-bold text-sunrise">{t('sidebar.title')}</h1>
+        <div className="w-64 bg-deep-navy min-h-screen flex flex-col text-white shadow-xl">
+            <div className="h-24 flex items-center justify-center border-b border-white/10 px-6">
+                <img src={logo} alt="MCIT Logo" className="h-16 w-auto" />
             </div>
             <nav className="flex-1 p-4 space-y-2">
                 {links.map((link) => (

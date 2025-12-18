@@ -16,6 +16,7 @@ import { ExcellenceProvider } from './context/ExcellenceContext';
 import JuryDashboard from './pages/jury/JuryDashboard';
 import VotingSession from './pages/jury/VotingSession';
 import AuditLogs from './pages/admin/AuditLogs';
+import Users from './pages/admin/Users';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -46,6 +47,7 @@ const App: React.FC = () => {
                   <Route path="/assessment" element={<Assessment />} />
                   <Route path="/cycles" element={<Cycles />} />
                   <Route path="/audit-logs" element={<AuditLogs />} />
+                  <Route path="/users" element={<Users />} />
                   <Route path="/reviews" element={<ReviewDashboard />} />
                   <Route path="/review/:submissionId" element={<ReviewAssessment />} />
                   <Route path="/reports" element={<EntityReport />} />
