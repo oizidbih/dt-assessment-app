@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Assessment from './pages/Assessment';
 import Cycles from './pages/admin/Cycles';
+import Assessments from './pages/admin/Assessments';
 import ReviewDashboard from './pages/assessor/ReviewDashboard';
 import ReviewAssessment from './pages/assessor/ReviewAssessment';
 import EntityReport from './pages/reports/EntityReport';
@@ -46,6 +47,7 @@ const App: React.FC = () => {
                   <Route index element={<Dashboard />} />
                   <Route path="/assessment" element={<Assessment />} />
                   <Route path="/cycles" element={<Cycles />} />
+                  <Route path="/assessments" element={<Assessments />} />
                   <Route path="/audit-logs" element={<AuditLogs />} />
                   <Route path="/users" element={<Users />} />
                   <Route path="/reviews" element={<ReviewDashboard />} />

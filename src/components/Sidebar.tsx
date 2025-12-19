@@ -26,6 +26,7 @@ const Sidebar: React.FC = () => {
                 return [
                     { to: '/', label: t('nav.overview'), icon: Home },
                     { to: '/cycles', label: t('nav.cycles'), icon: Settings },
+                    { to: '/assessments', label: 'Assessments', icon: ClipboardList },
                     { to: '/users', label: t('nav.users'), icon: Users },
                     { to: '/reports', label: t('nav.reports'), icon: BarChart2 },
                 ];

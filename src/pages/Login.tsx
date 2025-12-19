@@ -96,12 +96,12 @@ const Login: React.FC = () => {
                             <div className="absolute inset-0 bg-black/50"></div>
 
                             {/* Text Overlay */}
-                            <div className="relative z-10 p-8 pt-12 flex flex-col items-center justify-start h-full">
-                                <h1 className="text-2xl md:text-3xl font-bold mb-4 text-white drop-shadow-lg drop-shadow-white/20">
-                                    Digital Transformation Assessment
+                            <div className="relative z-10 p-8 pt-16 flex flex-col items-center justify-start h-full">
+                                <h1 className="text-2xl md:text-4xl font-black mb-4 text-white drop-shadow-2xl text-center leading-tight">
+                                    Empowering Qatar's<br />Digital Capabilities
                                 </h1>
-                                <p className="text-sm md:text-base text-gray-100 max-w-sm drop-shadow-md font-medium leading-relaxed">
-                                    Accelerating the digital adoption across government entities in the State of Qatar.
+                                <p className="text-base md:text-lg text-gray-200 max-w-sm drop-shadow-lg font-medium text-center italic opacity-90">
+                                    to offer better services for everyone
                                 </p>
                             </div>
                         </div>
