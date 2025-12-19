@@ -9,7 +9,8 @@ import {
     Settings,
     Award,
     ClipboardList,
-    Users
+    Users,
+    Sparkles
 } from 'lucide-react';
 import clsx from 'clsx';
 import logo from '../assets/logo.svg';
@@ -51,6 +52,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
             case 'executive':
                 return [
                     { to: '/', label: t('nav.executive_dashboard'), icon: Home },
+                    { to: '/strategic-insights', label: 'Strategic Insights', icon: Sparkles },
                     { to: '/national-reports', label: t('nav.national_reports'), icon: BarChart2 },
                 ];
             case 'jury':

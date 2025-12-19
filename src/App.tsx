@@ -19,6 +19,7 @@ import VotingSession from './pages/jury/VotingSession';
 import AuditLogs from './pages/admin/AuditLogs';
 import Users from './pages/admin/Users';
 import ReportsOverview from './pages/admin/ReportsOverview';
+import ExecutiveInsights from './pages/executive/ExecutiveInsights';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -55,6 +56,7 @@ const App: React.FC = () => {
                   <Route path="/review/:submissionId" element={<ReviewAssessment />} />
                   <Route path="/reports" element={<ReportsOverview />} />
                   <Route path="/reports/:entityId" element={<EntityReport />} />
+                  <Route path="/strategic-insights" element={<ExecutiveInsights />} />
                   <Route path="/national-reports" element={<NationalReport />} />
                   <Route path="/jury" element={<JuryDashboard />} />
                   <Route path="/jury/vote/:categoryId" element={<VotingSession />} />
