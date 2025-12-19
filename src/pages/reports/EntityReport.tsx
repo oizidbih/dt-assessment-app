@@ -85,23 +85,23 @@ const EntityReport: React.FC = () => {
             {/* Main Report Card */}
             <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 overflow-hidden print:shadow-none print:border-none">
                 {/* Visual Header */}
-                <div className="bg-gradient-to-r from-deep-navy to-skyline p-10 text-white relative">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32 blur-3xl" />
-                    <div className="relative z-10 flex flex-col md:flex-row justify-between items-end gap-6">
-                        <div>
-                            <div className="flex items-center space-x-3 mb-4">
-                                <span className="px-3 py-1 bg-white/20 backdrop-blur-md rounded-lg text-xs font-black uppercase tracking-widest text-white">
+                <div className="bg-gradient-to-r from-deep-navy to-skyline p-6 md:p-10 text-white relative">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32 blur-3xl shrink-0" />
+                    <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+                        <div className="min-w-0">
+                            <div className="flex flex-wrap items-center gap-3 mb-4">
+                                <span className="px-2 py-1 bg-white/20 backdrop-blur-md rounded-lg text-[10px] md:text-xs font-black uppercase tracking-widest text-white shrink-0">
                                     {details.status} Level
                                 </span>
-                                <span className="text-white/60 text-xs font-bold uppercase tracking-widest">• {details.sector} Sector</span>
+                                <span className="text-white/60 text-[10px] md:text-xs font-bold uppercase tracking-widest truncate">• {details.sector} Sector</span>
                             </div>
-                            <h1 className="text-4xl font-black tracking-tight mb-2">{details.name}</h1>
-                            <p className="text-white/80 font-medium max-w-lg">Digital Maturity Assessment Result • Fiscal Year 2025 Cycle</p>
+                            <h1 className="text-2xl md:text-4xl font-black tracking-tight mb-2 truncate">{details.name}</h1>
+                            <p className="text-white/80 text-xs md:text-sm font-medium max-w-lg">Digital Maturity Assessment Result • Fiscal Year 2025 Cycle</p>
                         </div>
-                        <div className="text-center md:text-right bg-white/10 backdrop-blur-xl p-6 rounded-2xl border border-white/20 min-w-[200px]">
+                        <div className="text-center md:text-right bg-white/10 backdrop-blur-xl p-4 md:p-6 rounded-2xl border border-white/20 w-full md:min-w-[200px] md:w-auto">
                             <p className="text-[10px] font-bold text-white/60 uppercase tracking-widest mb-1">Maturity Score</p>
-                            <p className="text-6xl font-black text-white leading-none mb-2">{details.score}%</p>
-                            <div className="flex items-center justify-center md:justify-end text-green-400 font-bold text-sm">
+                            <p className="text-4xl md:text-6xl font-black text-white leading-none mb-2">{details.score}%</p>
+                            <div className="flex items-center justify-center md:justify-end text-green-400 font-bold text-xs">
                                 <TrendingUp className="w-4 h-4 mr-1" />
                                 {details.trend} vs 2024
                             </div>
@@ -109,7 +109,7 @@ const EntityReport: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="p-10 space-y-12">
+                <div className="p-6 md:p-10 space-y-10 md:space-y-12">
                     {/* Insights Grid */}
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                         {/* Comparison Chart */}

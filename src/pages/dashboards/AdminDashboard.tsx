@@ -78,21 +78,21 @@ const AdminDashboard: React.FC = () => {
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                 {stats.map((stat, index) => (
-                    <div key={index} className="bg-white p-6 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 relative overflow-hidden group hover:shadow-xl transition-all duration-300">
+                    <div key={index} className="bg-white p-5 md:p-6 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-100 relative overflow-hidden group hover:shadow-xl transition-all duration-300">
                         <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${stat.color} opacity-30 -mr-16 -mt-16 rounded-full transition-transform group-hover:scale-110`} />
                         <div className="relative z-10">
-                            <div className={`p-3 rounded-xl bg-gray-50 ${stat.textColor} w-fit mb-4`}>
-                                <stat.icon className="w-6 h-6" />
+                            <div className={`p-2.5 rounded-xl bg-gray-50 ${stat.textColor} w-fit mb-3 md:mb-4`}>
+                                <stat.icon className="w-5 h-5 md:w-6 md:h-6" />
                             </div>
                             <div className="flex items-end justify-between">
                                 <div>
-                                    <p className="text-sm font-medium text-gray-500 mb-1">{stat.label}</p>
-                                    <p className="text-3xl font-black text-gray-900">{stat.value}</p>
+                                    <p className="text-[10px] md:text-sm font-medium text-gray-500 mb-1">{stat.label}</p>
+                                    <p className="text-2xl md:text-3xl font-black text-gray-900">{stat.value}</p>
                                 </div>
-                                <div className={`flex items-center text-xs font-bold px-2 py-1 rounded-lg ${stat.isUp ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
-                                    {stat.isUp ? <ArrowUpRight className="w-3 h-3 mr-1" /> : <ArrowDownRight className="w-3 h-3 mr-1" />}
+                                <div className={`flex items-center text-[10px] font-bold px-2 py-1 rounded-lg ${stat.isUp ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                                    {stat.isUp ? <ArrowUpRight className="w-2.5 h-2.5 mr-1" /> : <ArrowDownRight className="w-2.5 h-2.5 mr-1" />}
                                     {stat.trend}
                                 </div>
                             </div>
@@ -102,11 +102,11 @@ const AdminDashboard: React.FC = () => {
             </div>
 
             {/* Visualizations */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
                 {/* Maturity Trend */}
-                <div className="lg:col-span-2 bg-white p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-50">
-                    <h3 className="text-xl font-bold text-gray-900 mb-6">National Maturity Trend</h3>
-                    <div className="h-80 w-full">
+                <div className="lg:col-span-2 bg-white p-4 md:p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-50">
+                    <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-6 font-display uppercase tracking-tight">National Maturity Trend</h3>
+                    <div className="h-64 md:h-80 w-full">
                         <ResponsiveContainer width="100%" height="100%">
                             <AreaChart data={maturityTrendData}>
                                 <defs>
@@ -116,8 +116,8 @@ const AdminDashboard: React.FC = () => {
                                     </linearGradient>
                                 </defs>
                                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
-                                <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fill: '#9CA3AF', fontSize: 12 }} dy={10} />
-                                <YAxis axisLine={false} tickLine={false} tick={{ fill: '#9CA3AF', fontSize: 12 }} />
+                                <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fill: '#9CA3AF', fontSize: 10 }} dy={10} />
+                                <YAxis axisLine={false} tickLine={false} tick={{ fill: '#9CA3AF', fontSize: 10 }} />
                                 <Tooltip contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 10px 25px rgba(0,0,0,0.1)' }} />
                                 <Area type="monotone" dataKey="score" stroke="#8A1538" strokeWidth={3} fillOpacity={1} fill="url(#colorScoreAdmin)" />
                             </AreaChart>
@@ -126,12 +126,12 @@ const AdminDashboard: React.FC = () => {
                 </div>
 
                 {/* Sector Distribution */}
-                <div className="bg-white p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-50 flex flex-col">
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">Sector Breakdown</h3>
-                    <div className="h-64 w-full relative flex-1">
+                <div className="bg-white p-4 md:p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-50 flex flex-col">
+                    <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-2 font-display uppercase tracking-tight">Sector Breakdown</h3>
+                    <div className="h-48 md:h-64 w-full relative flex-1">
                         <ResponsiveContainer width="100%" height="100%">
                             <PieChart>
-                                <Pie data={sectorData} innerRadius={60} outerRadius={80} paddingAngle={5} dataKey="value">
+                                <Pie data={sectorData} innerRadius={window.innerWidth < 768 ? 50 : 60} outerRadius={window.innerWidth < 768 ? 70 : 80} paddingAngle={5} dataKey="value">
                                     {sectorData.map((_entry, index) => (
                                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                     ))}
@@ -140,26 +140,26 @@ const AdminDashboard: React.FC = () => {
                             </PieChart>
                         </ResponsiveContainer>
                         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                            <span className="text-2xl font-black text-gray-900">1.2k</span>
-                            <span className="text-xs font-bold text-gray-400 uppercase">Entities</span>
+                            <span className="text-xl md:text-2xl font-black text-gray-900">1.2k</span>
+                            <span className="text-[10px] md:text-xs font-bold text-gray-400 uppercase">Entities</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             {/* Lower Row */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
                 {/* Pillar Performance */}
-                <div className="bg-white p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-50">
-                    <h3 className="text-xl font-bold text-gray-900 mb-8">Pillar Performance</h3>
-                    <div className="h-72 w-full">
+                <div className="bg-white p-4 md:p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-50">
+                    <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-8 font-display uppercase tracking-tight">Pillar Performance</h3>
+                    <div className="h-64 md:h-72 w-full">
                         <ResponsiveContainer width="100%" height="100%">
-                            <BarChart data={pillarData} layout="vertical" margin={{ left: 20 }}>
+                            <BarChart data={pillarData} layout="vertical" margin={{ left: window.innerWidth < 768 ? 0 : 20 }}>
                                 <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#f0f0f0" />
                                 <XAxis type="number" hide />
-                                <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={{ fill: '#4B5563', fontSize: 13, fontWeight: 600 }} width={100} />
+                                <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={{ fill: '#4B5563', fontSize: 11, fontWeight: 600 }} width={80} />
                                 <Tooltip cursor={{ fill: 'transparent' }} />
-                                <Bar dataKey="score" radius={[0, 8, 8, 0]} barSize={24}>
+                                <Bar dataKey="score" radius={[0, 8, 8, 0]} barSize={20}>
                                     {pillarData.map((_entry, index) => (
                                         <Cell key={`bar-${index}`} fill={index === 0 ? '#8A1538' : '#0d4261'} opacity={0.8 - (index * 0.1)} />
                                     ))}
@@ -170,10 +170,10 @@ const AdminDashboard: React.FC = () => {
                 </div>
 
                 {/* Recent Activity */}
-                <div className="bg-white p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-50">
+                <div className="bg-white p-4 md:p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-50">
                     <div className="flex items-center justify-between mb-8">
-                        <h3 className="text-xl font-bold text-gray-900">Recent Activity</h3>
-                        <button className="text-sm font-bold text-al-adaam hover:underline">View All</button>
+                        <h3 className="text-lg md:text-xl font-bold text-gray-900 font-display uppercase tracking-tight">Recent Activity</h3>
+                        <button className="text-xs font-bold text-secondary hover:underline uppercase tracking-widest">View All</button>
                     </div>
                     <div className="space-y-6">
                         {[
@@ -183,20 +183,20 @@ const AdminDashboard: React.FC = () => {
                             { name: 'MCIT IT Support', action: 'New Cycle Created', time: '5 hours ago', color: 'bg-purple-100 text-purple-700' },
                         ].map((activity, i) => (
                             <div key={i} className="flex items-center justify-between group">
-                                <div className="flex items-center">
-                                    <div className="w-10 h-10 rounded-2xl bg-gray-50 flex items-center justify-center mr-4 group-hover:bg-gray-100 transition">
-                                        <Activity className="w-5 h-5 text-gray-400" />
+                                <div className="flex items-center min-w-0">
+                                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gray-50 flex items-center justify-center mr-3 md:mr-4 group-hover:bg-gray-100 transition shrink-0">
+                                        <Activity className="w-4 h-4 md:w-5 md:h-5 text-gray-400" />
                                     </div>
-                                    <div>
-                                        <p className="text-sm font-bold text-gray-900">{activity.name}</p>
-                                        <p className="text-xs text-gray-500">{activity.action}</p>
+                                    <div className="truncate">
+                                        <p className="text-xs md:text-sm font-bold text-gray-900 truncate">{activity.name}</p>
+                                        <p className="text-[10px] md:text-xs text-gray-500 truncate">{activity.action}</p>
                                     </div>
                                 </div>
-                                <div className="text-right">
-                                    <p className={`text-[10px] font-black uppercase tracking-wider px-2 py-1 rounded-md mb-1 ${activity.color}`}>
+                                <div className="text-right shrink-0 ml-4">
+                                    <p className={`text-[8px] md:text-[10px] font-black uppercase tracking-wider px-2 py-1 rounded-md mb-1 ${activity.color}`}>
                                         {activity.action.split(' ')[0]}
                                     </p>
-                                    <div className="flex items-center text-[10px] text-gray-400 font-bold justify-end">
+                                    <div className="flex items-center text-[8px] md:text-[10px] text-gray-400 font-bold justify-end">
                                         <Clock className="w-2.5 h-2.5 mr-1" />
                                         {activity.time}
                                     </div>

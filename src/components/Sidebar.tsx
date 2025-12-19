@@ -14,13 +14,19 @@ import {
 import clsx from 'clsx';
 import logo from '../assets/logo.svg';
 
-const Sidebar: React.FC = () => {
+interface SidebarProps {
+    isOpen: boolean;
+    onClose: () => void;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
     const { user } = useAuth();
     const { t } = useLanguage();
 
     if (!user) return null;
 
     const getLinks = (role: UserRole) => {
+        // ... (same switch logic)
         switch (role) {
             case 'admin':
                 return [
@@ -60,15 +66,25 @@ const Sidebar: React.FC = () => {
     const links = getLinks(user.role);
 
     return (
-        <div className="w-64 bg-deep-navy min-h-screen flex flex-col text-white shadow-xl">
-            <div className="h-24 flex items-center justify-center border-b border-white/10 px-6">
+        <div className={clsx(
+            "fixed inset-y-0 left-0 z-50 w-64 bg-[#040F25] flex flex-col text-white shadow-xl transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0",
+            isOpen ? "translate-x-0" : "-translate-x-full"
+        )}>
+            {/* Background Light Effect */}
+            <div className="absolute top-1/2 -left-24 w-48 h-96 bg-palm/20 blur-[100px] rounded-full pointer-events-none -translate-y-1/2 z-0 opacity-50 group-hover:opacity-70 transition-opacity duration-1000" />
+            <div className="absolute top-1/2 -left-12 w-24 h-48 bg-white/5 blur-[40px] rounded-full pointer-events-none -translate-y-1/2 z-0" />
+
+            <div className="h-24 flex items-center justify-center border-b border-white/10 px-6 relative z-10">
                 <img src={logo} alt="MCIT Logo" className="h-16 w-auto" />
             </div>
-            <nav className="flex-1 p-4 space-y-2">
+            <nav className="flex-1 p-4 space-y-2 relative z-10">
                 {links.map((link) => (
                     <NavLink
                         key={link.to}
                         to={link.to}
+                        onClick={() => {
+                            if (window.innerWidth < 1024) onClose();
+                        }}
                         className={({ isActive }) =>
                             clsx(
                                 'flex items-center px-4 py-3 rounded-lg transition-colors',
@@ -83,7 +99,7 @@ const Sidebar: React.FC = () => {
                     </NavLink>
                 ))}
             </nav>
-            <div className="p-4 border-t border-white/10">
+            <div className="p-4 border-t border-white/10 relative z-10">
                 <p className="text-xs text-gray-400 text-center">{t('nav.version')}</p>
             </div>
         </div>

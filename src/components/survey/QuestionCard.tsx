@@ -17,28 +17,28 @@ const QuestionCard: React.FC<QuestionCardProps> = ({ question }) => {
     };
 
     return (
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-6">
-            <div className="flex items-start justify-between mb-4">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 md:p-6 mb-4 md:mb-6">
+            <div className="flex flex-col md:flex-row md:items-start justify-between mb-4 gap-3">
                 <div className="flex-1">
-                    <h3 className="text-lg font-medium text-gray-900">{question.text}</h3>
+                    <h3 className="text-base md:text-lg font-bold text-gray-900 leading-tight">{question.text}</h3>
                     {question.description && (
-                        <p className="text-sm text-gray-500 mt-1 flex items-center">
-                            <Info className="w-3 h-3 mr-1" />
+                        <p className="text-[11px] md:text-sm text-gray-500 mt-1 flex items-center bg-gray-50 p-2 rounded-lg border border-gray-100 italic">
+                            <Info className="w-3 h-3 mr-1 shrink-0" />
                             {question.description}
                         </p>
                     )}
                     {question.standardMapping && (
                         <div className="flex flex-wrap gap-2 mt-3">
                             {question.standardMapping.map((std, idx) => (
-                                <span key={idx} className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-[#040F25]/5 text-[#040F25] border border-[#040F25]/10 uppercase tracking-tight">
+                                <span key={idx} className="inline-flex items-center px-1.5 py-0.5 rounded text-[8px] md:text-[10px] font-black bg-[#040F25]/5 text-[#040F25] border border-[#040F25]/10 uppercase tracking-tighter">
                                     {std}
                                 </span>
                             ))}
                         </div>
                     )}
                 </div>
-                <div className="text-right ml-4">
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 whitespace-nowrap">
+                <div className="flex md:block items-center justify-end">
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] md:text-xs font-black bg-gray-100 text-gray-800 whitespace-nowrap uppercase tracking-widest border border-gray-200 shadow-sm">
                         Weight: {question.weight}
                     </span>
                 </div>

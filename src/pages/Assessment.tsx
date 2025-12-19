@@ -25,13 +25,13 @@ const Assessment: React.FC = () => {
     const isLastPillar = survey.pillars[survey.pillars.length - 1].id === currentPillarId;
 
     return (
-        <div className="flex bg-gray-50 h-[calc(100vh-4rem)]">
+        <div className="flex flex-col lg:flex-row bg-gray-50 h-auto lg:h-[calc(100vh-4rem)]">
             <PillarNav
                 currentPillarId={currentPillarId}
                 onSelect={setCurrentPillarId}
             />
 
-            <div className="flex-1 overflow-auto scroll-smooth">
+            <div className="flex-1 overflow-y-auto overflow-x-hidden scroll-smooth transition-all duration-500">
                 {/* Methodology Highlight */}
                 <div className="bg-gradient-to-r from-[#040F25] to-[#004B87] text-white py-4 px-6 shadow-md border-b border-white/10">
                     <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
