@@ -19,7 +19,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({ question }) => {
     return (
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-6">
             <div className="flex items-start justify-between mb-4">
-                <div>
+                <div className="flex-1">
                     <h3 className="text-lg font-medium text-gray-900">{question.text}</h3>
                     {question.description && (
                         <p className="text-sm text-gray-500 mt-1 flex items-center">
@@ -27,10 +27,21 @@ const QuestionCard: React.FC<QuestionCardProps> = ({ question }) => {
                             {question.description}
                         </p>
                     )}
+                    {question.standardMapping && (
+                        <div className="flex flex-wrap gap-2 mt-3">
+                            {question.standardMapping.map((std, idx) => (
+                                <span key={idx} className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-[#040F25]/5 text-[#040F25] border border-[#040F25]/10 uppercase tracking-tight">
+                                    {std}
+                                </span>
+                            ))}
+                        </div>
+                    )}
                 </div>
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                    Weight: {question.weight}
-                </span>
+                <div className="text-right ml-4">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 whitespace-nowrap">
+                        Weight: {question.weight}
+                    </span>
+                </div>
             </div>
 
             {/* Render Input based on Type */}

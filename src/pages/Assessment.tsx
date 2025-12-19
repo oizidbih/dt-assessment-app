@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSurvey } from '../context/SurveyContext';
 import PillarNav from '../components/survey/PillarNav';
 import QuestionCard from '../components/survey/QuestionCard';
-import { Save, Send } from 'lucide-react';
+import { Save, Send, Award } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const Assessment: React.FC = () => {
@@ -31,7 +31,29 @@ const Assessment: React.FC = () => {
                 onSelect={setCurrentPillarId}
             />
 
-            <div className="flex-1 overflow-auto">
+            <div className="flex-1 overflow-auto scroll-smooth">
+                {/* Methodology Highlight */}
+                <div className="bg-gradient-to-r from-[#040F25] to-[#004B87] text-white py-4 px-6 shadow-md border-b border-white/10">
+                    <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+                        <div className="flex items-center space-x-4">
+                            <div className="p-2 bg-white/10 backdrop-blur-md rounded-lg border border-white/20">
+                                <Award className="w-6 h-6 text-dune" />
+                            </div>
+                            <div>
+                                <h4 className="text-sm font-black uppercase tracking-widest text-dune">QDGM Framework 2025</h4>
+                                <p className="text-xs text-white/70 font-medium">Fully aligned with UN EGDI, OECD, and Qatar Digital Agenda 2030</p>
+                            </div>
+                        </div>
+                        <div className="flex -space-x-2">
+                            {['UN EGDI', 'OECD', 'SDG', 'DA2030', 'NDS3'].map((tag) => (
+                                <div key={tag} className="px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-[9px] font-black tracking-tighter hover:bg-white/20 transition-colors cursor-help" title={`Verified mapping to ${tag} standards`}>
+                                    {tag}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
                 <div className="max-w-3xl mx-auto py-8 px-4">
                     <div className="mb-8">
                         <h1 className="text-2xl font-bold text-gray-900">{currentPillar.title}</h1>

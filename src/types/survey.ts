@@ -15,6 +15,7 @@ export interface Question {
     min?: number; // For rating/scale
     max?: number;
     weight: number;
+    standardMapping?: string[]; // e.g. ["UN EGDI: OSI", "QNV 2030"]
 }
 
 export interface Section {
@@ -30,6 +31,7 @@ export interface Pillar {
     icon?: string;
     sections: Section[];
     weight: number;
+    standardMapping?: string[];
 }
 
 export interface Survey {
