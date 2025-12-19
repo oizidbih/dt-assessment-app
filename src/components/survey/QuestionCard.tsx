@@ -6,18 +6,23 @@ import EvidenceUpload from './EvidenceUpload';
 
 interface QuestionCardProps {
     question: Question;
+    onFocus?: (question: Question) => void;
 }
 
-const QuestionCard: React.FC<QuestionCardProps> = ({ question }) => {
+const QuestionCard: React.FC<QuestionCardProps> = ({ question, onFocus }) => {
     const { answers, setAnswer, addEvidence } = useSurvey();
     const currentAnswer = answers[question.id];
 
     const handleChange = (val: any) => {
         setAnswer(question.id, val);
+        onFocus?.(question);
     };
 
     return (
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 md:p-6 mb-4 md:mb-6">
+        <div
+            onClick={() => onFocus?.(question)}
+            className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 md:p-6 mb-4 md:mb-6 cursor-pointer focus-within:ring-2 focus-within:ring-skyline/10 transition-shadow"
+        >
             <div className="flex flex-col md:flex-row md:items-start justify-between mb-4 gap-3">
                 <div className="flex-1">
                     <h3 className="text-base md:text-lg font-bold text-gray-900 leading-tight">{question.text}</h3>

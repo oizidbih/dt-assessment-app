@@ -4,10 +4,13 @@ import PillarNav from '../components/survey/PillarNav';
 import QuestionCard from '../components/survey/QuestionCard';
 import { Save, Send, Award } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import DTACompanion from '../components/chat/DTACompanion';
+import { type Question } from '../types/survey';
 
 const Assessment: React.FC = () => {
-    const { survey } = useSurvey();
+    const { survey, answers } = useSurvey();
     const [currentPillarId, setCurrentPillarId] = useState(survey.pillars[0].id);
+    const [activeQuestion, setActiveQuestion] = useState<Question | null>(null);
     const navigate = useNavigate();
 
     const currentPillar = survey.pillars.find(p => p.id === currentPillarId);
@@ -18,6 +21,7 @@ const Assessment: React.FC = () => {
         const idx = survey.pillars.findIndex(p => p.id === currentPillarId);
         if (idx < survey.pillars.length - 1) {
             setCurrentPillarId(survey.pillars[idx + 1].id);
+            setActiveQuestion(null);
             window.scrollTo(0, 0);
         }
     };
@@ -68,7 +72,11 @@ const Assessment: React.FC = () => {
                                 </h2>
                                 <div>
                                     {section.questions.map((q) => (
-                                        <QuestionCard key={q.id} question={q} />
+                                        <QuestionCard
+                                            key={q.id}
+                                            question={q}
+                                            onFocus={setActiveQuestion}
+                                        />
                                     ))}
                                 </div>
                             </div>
@@ -100,6 +108,38 @@ const Assessment: React.FC = () => {
                     </div>
                 </div>
             </div>
+
+            {/* AI Companion */}
+            <DTACompanion
+                context={{
+                    pillarTitle: currentPillar.title,
+                    description: currentPillar.description,
+                    questions: currentPillar.sections.flatMap(s => s.questions).map((q, idx) => ({
+                        index: idx + 1,
+                        id: q.id,
+                        text: q.text,
+                        description: q.description || '',
+                        standardMapping: q.standardMapping || []
+                    })),
+                    activeQuestionId: activeQuestion?.id,
+                    previousAnswers: survey.pillars.flatMap(p =>
+                        p.sections.flatMap(s => s.questions)
+                            .filter(q => answers[q.id]?.value !== undefined)
+                            .map(q => {
+                                const ans = answers[q.id];
+                                let label = String(ans.value);
+                                if (q.type === 'choice' && q.options) {
+                                    label = q.options.find(o => o.value === ans.value)?.label || label;
+                                }
+                                return {
+                                    pillarTitle: p.title,
+                                    questionText: q.text,
+                                    answerLabel: label
+                                };
+                            })
+                    )
+                }}
+            />
         </div>
     );
 };
