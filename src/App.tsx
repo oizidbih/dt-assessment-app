@@ -20,6 +20,7 @@ import AuditLogs from './pages/admin/AuditLogs';
 import Users from './pages/admin/Users';
 import ReportsOverview from './pages/admin/ReportsOverview';
 import ExecutiveInsights from './pages/executive/ExecutiveInsights';
+import LanguageTest from './pages/LanguageTest';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -39,6 +40,7 @@ const App: React.FC = () => {
             <ExcellenceProvider>
               <Routes>
                 <Route path="/login" element={<Login />} />
+                <Route path="/language-test" element={<LanguageTest />} />
 
                 {/* Protected Routes */}
                 <Route path="/" element={

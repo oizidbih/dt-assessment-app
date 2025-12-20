@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSurvey } from '../context/SurveyContext';
+import { useTranslation } from 'react-i18next';
 import PillarNav from '../components/survey/PillarNav';
 import QuestionCard from '../components/survey/QuestionCard';
 import { Save, Send, Award } from 'lucide-react';
@@ -9,13 +10,14 @@ import { type Question } from '../types/survey';
 
 const Assessment: React.FC = () => {
     const { survey, answers } = useSurvey();
+    const { t } = useTranslation();
     const [currentPillarId, setCurrentPillarId] = useState(survey.pillars[0].id);
     const [activeQuestion, setActiveQuestion] = useState<Question | null>(null);
     const navigate = useNavigate();
 
     const currentPillar = survey.pillars.find(p => p.id === currentPillarId);
 
-    if (!currentPillar) return <div>Pillar not found</div>;
+    if (!currentPillar) return <div>{t('assessment.pillar_not_found')}</div>;
 
     const handleNextPillar = () => {
         const idx = survey.pillars.findIndex(p => p.id === currentPillarId);
@@ -39,18 +41,18 @@ const Assessment: React.FC = () => {
                 {/* Methodology Highlight */}
                 <div className="bg-gradient-to-r from-[#040F25] to-[#004B87] text-white py-4 px-6 shadow-md border-b border-white/10">
                     <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-                        <div className="flex items-center space-x-4">
+                        <div className="flex items-center space-x-4 rtl:space-x-reverse">
                             <div className="p-2 bg-white/10 backdrop-blur-md rounded-lg border border-white/20">
                                 <Award className="w-6 h-6 text-dune" />
                             </div>
                             <div>
-                                <h4 className="text-sm font-black uppercase tracking-widest text-dune">QDGM Framework 2025</h4>
-                                <p className="text-xs text-white/70 font-medium">Fully aligned with UN EGDI, OECD, and Qatar Digital Agenda 2030</p>
+                                <h4 className="text-sm font-black uppercase tracking-widest text-dune">{t('assessment.framework_title')}</h4>
+                                <p className="text-xs text-white/70 font-medium">{t('assessment.framework_subtitle')}</p>
                             </div>
                         </div>
-                        <div className="flex -space-x-2">
+                        <div className="flex -space-x-2 rtl:space-x-reverse">
                             {['UN EGDI', 'OECD', 'SDG', 'DA2030', 'NDS3'].map((tag) => (
-                                <div key={tag} className="px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-[9px] font-black tracking-tighter hover:bg-white/20 transition-colors cursor-help" title={`Verified mapping to ${tag} standards`}>
+                                <div key={tag} className="px-3 py-1 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-[9px] font-black tracking-tighter hover:bg-white/20 transition-colors cursor-help" title={t('assessment.verified_mapping', { standard: tag })}>
                                     {tag}
                                 </div>
                             ))}
@@ -85,8 +87,8 @@ const Assessment: React.FC = () => {
 
                     <div className="flex items-center justify-between mt-10 pt-6 border-t border-gray-200">
                         <button className="flex items-center px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
-                            <Save className="w-4 h-4 mr-2" />
-                            Save Draft
+                            <Save className="w-4 h-4 mr-2 rtl:mr-0 rtl:ml-2" />
+                            {t('assessment.save_draft')}
                         </button>
 
                         {isLastPillar ? (
@@ -94,15 +96,15 @@ const Assessment: React.FC = () => {
                                 onClick={() => navigate('/reports')}
                                 className="flex items-center px-6 py-2 bg-palm text-white rounded-lg hover:bg-opacity-90 shadow-sm"
                             >
-                                <Send className="w-4 h-4 mr-2" />
-                                Submit Assessment
+                                <Send className="w-4 h-4 mr-2 rtl:mr-0 rtl:ml-2" />
+                                {t('assessment.submit_assessment')}
                             </button>
                         ) : (
                             <button
                                 onClick={handleNextPillar}
                                 className="flex items-center px-6 py-2 bg-al-adaam text-white rounded-lg hover:bg-opacity-90 shadow-sm"
                             >
-                                Next Pillar
+                                {t('assessment.next_pillar')}
                             </button>
                         )}
                     </div>

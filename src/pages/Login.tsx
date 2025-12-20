@@ -3,6 +3,7 @@ import { useAuth, type UserRole } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { ShieldCheck, User, BarChart3, Gavel, LayoutDashboard, ChevronDown } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import backgroundImg from '../assets/background.jpg';
 import logoWithText from '../assets/logo.svg';
 import introVideo from '../assets/intro.mp4';
@@ -10,18 +11,19 @@ import introVideo from '../assets/intro.mp4';
 const Login: React.FC = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     const handleLogin = (role: UserRole) => {
         login(role);
         navigate('/');
     };
 
-    const roles: { role: UserRole; label: string; icon: React.ReactNode; description: string }[] = [
-        { role: 'admin', label: 'DTA Program Manager', icon: <ShieldCheck className="w-6 h-6" />, description: 'Manage cycles, users, and overall system.' },
-        { role: 'focal_point', label: 'Entity Focal Point', icon: <LayoutDashboard className="w-6 h-6" />, description: 'Submit assessments and manage entity data.' },
-        { role: 'assessor', label: 'DTA Assessor', icon: <User className="w-6 h-6" />, description: 'Review and audit entity submissions.' },
-        { role: 'executive', label: 'MCIT Executive', icon: <BarChart3 className="w-6 h-6" />, description: 'View high-level reports and dashboards.' },
-        { role: 'jury', label: 'Excellence Jury', icon: <Gavel className="w-6 h-6" />, description: 'Evaluate nominations for awards.' },
+    const roles: { role: UserRole; labelKey: string; icon: React.ReactNode; descKey: string }[] = [
+        { role: 'admin', labelKey: 'login.role_dta_manager', icon: <ShieldCheck className="w-6 h-6" />, descKey: 'login.role_dta_manager_desc' },
+        { role: 'focal_point', labelKey: 'login.role_focal_point', icon: <LayoutDashboard className="w-6 h-6" />, descKey: 'login.role_focal_point_desc' },
+        { role: 'assessor', labelKey: 'login.role_assessor', icon: <User className="w-6 h-6" />, descKey: 'login.role_assessor_desc' },
+        { role: 'executive', labelKey: 'login.role_executive', icon: <BarChart3 className="w-6 h-6" />, descKey: 'login.role_executive_desc' },
+        { role: 'jury', labelKey: 'login.role_jury', icon: <Gavel className="w-6 h-6" />, descKey: 'login.role_jury_desc' },
     ];
 
     return (
@@ -39,32 +41,32 @@ const Login: React.FC = () => {
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[2px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
 
                 <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-4 rtl:space-x-reverse">
                         <img src={logoWithText} alt="MCIT Logo" className="h-12 w-auto filter brightness-0 invert" />
                     </div>
 
-                    <nav className="hidden lg:flex items-center space-x-8">
-                        <a href="#" className="text-white text-xs font-bold tracking-widest hover:text-white/70 transition">HOME</a>
-                        <div className="flex items-center space-x-1 group cursor-pointer">
-                            <a href="#" className="text-white text-xs font-bold tracking-widest group-hover:text-white/70 transition uppercase">About Us</a>
+                    <nav className="hidden lg:flex items-center space-x-8 rtl:space-x-reverse">
+                        <a href="#" className="text-white text-xs font-bold tracking-widest hover:text-white/70 transition">{t('nav.home')}</a>
+                        <div className="flex items-center space-x-1 rtl:space-x-reverse group cursor-pointer">
+                            <a href="#" className="text-white text-xs font-bold tracking-widest group-hover:text-white/70 transition uppercase">{t('nav.about_us')}</a>
                             <ChevronDown className="w-3 h-3 text-white/70 group-hover:text-white transition" />
                         </div>
-                        <a href="#" className="text-white text-xs font-bold tracking-widest hover:text-white/70 transition uppercase">Gov AI Program</a>
-                        <div className="flex items-center space-x-1 group cursor-pointer">
-                            <a href="#" className="text-white text-xs font-bold tracking-widest group-hover:text-white/70 transition uppercase">Career</a>
+                        <a href="#" className="text-white text-xs font-bold tracking-widest hover:text-white/70 transition uppercase">{t('nav.gov_ai_program')}</a>
+                        <div className="flex items-center space-x-1 rtl:space-x-reverse group cursor-pointer">
+                            <a href="#" className="text-white text-xs font-bold tracking-widest group-hover:text-white/70 transition uppercase">{t('nav.career')}</a>
                             <ChevronDown className="w-3 h-3 text-white/70 group-hover:text-white transition" />
                         </div>
-                        <a href="#" className="text-white text-xs font-bold tracking-widest hover:text-white/70 transition uppercase">Services</a>
-                        <div className="flex items-center space-x-1 group cursor-pointer">
-                            <a href="#" className="text-white text-xs font-bold tracking-widest group-hover:text-white/70 transition uppercase">Media Centre</a>
+                        <a href="#" className="text-white text-xs font-bold tracking-widest hover:text-white/70 transition uppercase">{t('nav.services')}</a>
+                        <div className="flex items-center space-x-1 rtl:space-x-reverse group cursor-pointer">
+                            <a href="#" className="text-white text-xs font-bold tracking-widest group-hover:text-white/70 transition uppercase">{t('nav.media_centre')}</a>
                             <ChevronDown className="w-3 h-3 text-white/70 group-hover:text-white transition" />
                         </div>
-                        <div className="flex items-center space-x-1 group cursor-pointer">
-                            <a href="#" className="text-white text-xs font-bold tracking-widest group-hover:text-white/70 transition uppercase">Publications</a>
+                        <div className="flex items-center space-x-1 rtl:space-x-reverse group cursor-pointer">
+                            <a href="#" className="text-white text-xs font-bold tracking-widest group-hover:text-white/70 transition uppercase">{t('nav.publications')}</a>
                             <ChevronDown className="w-3 h-3 text-white/70 group-hover:text-white transition" />
                         </div>
-                        <div className="flex items-center space-x-1 group cursor-pointer">
-                            <a href="#" className="text-white text-xs font-bold tracking-widest group-hover:text-white/70 transition uppercase">Help & Contact</a>
+                        <div className="flex items-center space-x-1 rtl:space-x-reverse group cursor-pointer">
+                            <a href="#" className="text-white text-xs font-bold tracking-widest group-hover:text-white/70 transition uppercase">{t('nav.help_contact')}</a>
                             <ChevronDown className="w-3 h-3 text-white/70 group-hover:text-white transition" />
                         </div>
                     </nav>
@@ -98,10 +100,10 @@ const Login: React.FC = () => {
                             {/* Text Overlay */}
                             <div className="relative z-10 p-8 pt-16 flex flex-col items-center justify-start h-full">
                                 <h1 className="text-2xl md:text-4xl font-black mb-4 text-white drop-shadow-2xl text-center leading-tight">
-                                    Empowering Qatar's<br />Digital Capabilities
+                                    {t('login.page_title')}
                                 </h1>
                                 <p className="text-base md:text-lg text-gray-200 max-w-sm drop-shadow-lg font-medium text-center italic opacity-90">
-                                    to offer better services for everyone
+                                    {t('login.page_subtitle')}
                                 </p>
                             </div>
                         </div>
@@ -111,23 +113,23 @@ const Login: React.FC = () => {
 
                     {/* Right Side: Login Card */}
                     <div className="w-full md:w-[450px] bg-white bg-opacity-95 backdrop-blur-sm rounded-2xl shadow-2xl p-8 border border-white/20 flex flex-col">
-                        <h2 className="text-2xl font-bold text-dune mb-6 text-center">Select Interface</h2>
+                        <h2 className="text-2xl font-bold text-dune mb-6 text-center">{t('login.select_interface')}</h2>
                         <div className="grid grid-cols-1 gap-3 flex-1 overflow-y-auto pr-2 custom-scrollbar">
                             {roles.map((item) => (
                                 <button
                                     key={item.role}
                                     onClick={() => handleLogin(item.role)}
-                                    className="w-full flex items-center p-3 border border-gray-200 rounded-lg hover:border-al-adaam hover:bg-red-50 transition-all group text-left"
+                                    className="w-full flex items-center p-3 border border-gray-200 rounded-lg hover:border-al-adaam hover:bg-red-50 transition-all group text-left rtl:text-right"
                                 >
-                                    <div className="mr-3 text-dune group-hover:text-al-adaam p-2 bg-gray-50 rounded-full group-hover:bg-white transition-colors">
+                                    <div className="mr-3 rtl:mr-0 rtl:ml-3 text-dune group-hover:text-al-adaam p-2 bg-gray-50 rounded-full group-hover:bg-white transition-colors">
                                         {item.icon}
                                     </div>
                                     <div>
                                         <h3 className="text-sm font-bold text-gray-800 group-hover:text-al-adaam">
-                                            {item.label}
+                                            {t(item.labelKey)}
                                         </h3>
                                         <p className="text-xs text-gray-500 leading-tight">
-                                            {item.description}
+                                            {t(item.descKey)}
                                         </p>
                                     </div>
                                 </button>

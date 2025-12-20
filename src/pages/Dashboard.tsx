@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
+import { useTranslation } from 'react-i18next';
 import AdminDashboard from './dashboards/AdminDashboard';
 import EntityDashboard from './dashboards/EntityDashboard';
 import ExecutiveDashboard from './dashboards/ExecutiveDashboard';
@@ -8,6 +9,7 @@ import JuryDashboard from './dashboards/JuryDashboard';
 
 const Dashboard: React.FC = () => {
     const { user } = useAuth();
+    const { t } = useTranslation();
 
     if (!user) return null;
 
@@ -23,7 +25,7 @@ const Dashboard: React.FC = () => {
         case 'jury':
             return <JuryDashboard />;
         default:
-            return <div className="p-8 text-center text-gray-500">Role not recognized</div>;
+            return <div className="p-8 text-center text-gray-500">{t('app.role_not_recognized')}</div>;
     }
 };
 
